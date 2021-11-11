@@ -126,13 +126,7 @@ class Lambdasian {
     return `Hello my name is ${this.name}, I am from ${this.location}`;
   }
 }
-// const newLamb = new Lambdasian ({
-//   name: 'John',
-//   age: 20,
-//   location: 'San Francisco',
-// });
-// console.log(newLamb);
-// console.log(newLamb.speak());
+
 /*
   TASK 4
     - Write an Instructor class extending Lambdasian.
@@ -160,18 +154,21 @@ class Instructor extends Lambdasian {
   grade(student, subject) {
     return `${student.name} receives a perfect score on ${subject}`;
   }
+  graduate(student) {
+    const random = Math.floor(Math.random());
+    if (random === 0) {
+      student.grade = student.grade + Math.floor(Math.random() * 100);
+    } else {
+      student.grade = student.grade - Math.floor(Math.random() * 100);
+    }
+    if (student.grade >= 70) {
+      return `${this.name} graduates ${student.name}`;
+    } else {
+      return `${student.name} fails`;
+    }
+  }
 }
-// const teacher = new Instructor({
-//   name: 'Bill',
-//   age: 38,
-//   location: 'New York',
-//   specialty: 'redux',
-//   favLanguage: 'JavaScript',
-//   catchPhrase: "Don't forget the homies",
-// });
-// console.log(teacher);
-// console.log(teacher.demo('JavaScript'));
-// console.log(teacher.grade('Joe', 'JavaScript'));
+
 /*
   TASK 5
     - Write a Student class extending Lambdasian.
@@ -193,6 +190,7 @@ class Student extends Lambdasian{
      this.previousBackground = attributes.previousBackground;
      this.className = attributes.className;
      this.favSubjects = attributes.favSubjects;
+     this.grade = attributes.grade;
    }
    listSubjects() {
      return `Loving ${this.favSubjects}!`;
@@ -204,16 +202,7 @@ class Student extends Lambdasian{
      return `${this.name} has begun sprint challenge on ${subject}`;
    }
 }
-// const joe = new Student ({
-//   name: 'Joe',
-//   age: 23,
-//   location: 'Pennsylvania',
-//   previousBackground: 'Cook',
-//   className: 'WEB50',
-//   favSubjects: ['HTML', 'CSS', 'JavaScript'],
-// });
-// console.log(joe);
-// console.log(joe.listSubjects());
+
 /*
   TASK 6
     - Write a ProjectManager class extending Instructor.
@@ -240,6 +229,46 @@ class ProjectManager extends Instructor {
      return `${this.name} debugs ${student.name}'s code on ${subject}`;
    }
 }
+
+const projManager = new ProjectManager({
+  name: 'James',
+  age: 40,
+  location: 'New York',
+  specialty: 'redux',
+  favLanguage: 'JavaScript',
+  catchPhrase: "Don't forget the homies",
+  gradClassName: 'CS1',
+  favInstructor: 'Sean'
+});
+
+const joe = new Student ({
+  name: 'Joe',
+  age: 23,
+  location: 'Pennsylvania',
+  previousBackground: 'Cook',
+  className: 'WEB50',
+  favSubjects: ['HTML', 'CSS', 'JavaScript'],
+  grade: 0,
+});
+
+const teacher = new Instructor({
+  name: 'Bill',
+  age: 38,
+  location: 'New York',
+  specialty: 'redux',
+  favLanguage: 'JavaScript',
+  catchPhrase: "Don't forget the homies",
+});
+
+const newLamb = new Lambdasian ({
+  name: 'John',
+  age: 20,
+  location: 'San Francisco',
+});
+
+console.log(teacher.graduate(joe));
+console.log(joe);
+
 /*
   STRETCH PROBLEM (no tests!)
     - Extend the functionality of the Student by adding a prop called grade and setting it equal to a number between 1-100.
