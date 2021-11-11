@@ -42,9 +42,28 @@ class Airplane {
 */
 
 class Person {
-  
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+    this.stomach = [];
+  }
+  eat(edible) {
+    if (this.stomach.length < 10) {
+      this.stomach.push(edible);
+    }
+  }
+  poop() {
+    this.stomach = [];
+  }
+  toString() {
+    return `${this.name}, ${this.age}`;
+  }
 }
-
+// const person = new Person('Bob', 30);
+// person.eat('pizza');
+// person.poop();
+// console.log(person.toString());
+// console.log(person);
 /*
   TASK 2
     - Write a Car class whose constructor initializes `model` and `milesPerGallon` from arguments.
@@ -60,9 +79,31 @@ class Person {
 */
 
 class Car {
-  
+  constructor(model, milesPerGallon) {
+    this.model = model;
+    this.milesPerGallon = milesPerGallon;
+    this.tank = 0;
+    this.odometer = 0;
+  }
+  fill(gallons) {
+    this.tank = this.tank + gallons;
+  }
+  drive(distance) {
+    let miles =  this.tank * this.milesPerGallon;
+    if(distance <= miles) {
+      this.odometer = this.odometer + distance;
+      this.tank = this.tank - (distance / this.milesPerGallon);
+    } else {
+      this.odometer = this.odometer + miles;
+      this.tank = 0;
+      return `I ran out of fuel at ${this.odometer} miles!`;
+    }
+  }
 }
-
+// const nissan = new Car('Nissan Sentra', 40);
+// nissan.fill(10);
+// console.log(nissan.drive(500));
+// console.log(nissan);
 /*
   TASK 3
     - Write a Lambdasian class.
